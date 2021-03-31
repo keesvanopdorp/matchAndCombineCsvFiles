@@ -36,19 +36,21 @@ def main():
         df1 = pd.read_csv(filePath2)
         columns = [*df.columns, *df1.columns]
         newDf = pd.DataFrame(columns=columns)
-        toolbar_width = df.size
-        sys.stdout.write("[%s]" % (" " * toolbar_width))
-        sys.stdout.flush()
-        # return to start of line, after '['
-        sys.stdout.write("\b" * (toolbar_width+1))
-        for index, row in df.iterrows():
-            for index1, row1 in df1.iterrows():
-                if str(row[column1]).lower() == str(row1[column2]).lower():
-                    print("Match found ")
-                    s = pd.Series(data=[*row, *row1],
-                                  index=columns)
-                else:
-                    print("No match found ")
+        try:
+            toolbar_width = df.size
+            sys.stdout.write("[%s]" % (" " * toolbar_width))
+            # return to start of line, after '['
+            sys.stdout.write("\b" * (toolbar_width+1))
+            for index, row in df.iterrows():
+                addEmpty = True
+                for index1, row1 in df1.iterrows():
+                    if str(row[column1]).lower() == str(row1[column2]).lower():
+                        s = pd.Series(data=[*row, *row1],
+                                      index=columns)
+                        addEmpty = False
+                        newDf = newDf.append(s, ignore_index=True)
+                print(addEmpty)
+                if addEmpty == True:
                     toAddLen = len(columns) - len(row)
                     newRow = []
                     for x in range(toAddLen):
@@ -56,11 +58,13 @@ def main():
                     s = pd.Series(
                         data=[*row, *newRow],
                         index=[*df.columns, *df1.columns])
-            newDf = newDf.append(s, ignore_index=True)
-            sys.stdout.write("-")
-            sys.stdout.flush()
-    sys.stdout.write("]\n")  # this ends the progress bar
-    newDf.to_csv(os.path.join(sourceDir, "out.csv"))
+                    newDf = newDf.append(s, ignore_index=True)
+                sys.stdout.write("-")
+                sys.stdout.flush()
+            sys.stdout.write("]\n")  # this ends the progress bar
+            newDf.to_csv(os.path.join(sourceDir, "out.csv"))
+        except KeyboardInterrupt:
+            newDf.to_csv(os.path.join(sourceDir, "out.csv"))
 
 
 if __name__ == "__main__":
