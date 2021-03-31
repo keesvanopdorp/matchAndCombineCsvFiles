@@ -44,11 +44,11 @@ def main():
         for index, row in df.iterrows():
             for index1, row1 in df1.iterrows():
                 if str(row[column1]).lower() == str(row1[column2]).lower():
-                    #print("Match found ")
+                    print("Match found ")
                     s = pd.Series(data=[*row, *row1],
                                   index=columns)
                 else:
-                    #print("No match found ")
+                    print("No match found ")
                     toAddLen = len(columns) - len(row)
                     newRow = []
                     for x in range(toAddLen):
