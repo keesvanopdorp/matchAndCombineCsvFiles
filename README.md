@@ -16,17 +16,21 @@
 
 ## 2. Installation
 
-### 2.1 How to install Python 3
+### 2.1 Clone this repo
+
+the first step is to clone this repo from github or download by downloading the zip
+
+### 2.2 How to install Python 3
 
 Python3 can be installed on 2 ways on mac os by installing the xcode developer tools by running `xcode-select --install` or by downloading the installer from the python website
 
-### 2.2.1 How to install the pandas library on intel mac / windows machine
+### 2.3.1 How to install the pandas library on intel mac / windows machine
 
 open a terminal and run the command `pip3 install pandas`
 
-#### 2.2.2 How to install the pandas library on M1 macbook
+#### 2.3.2 How to install the pandas library on M1 macbook
 
-##### 2.2.2.1 Native (prefered)
+##### 2.3.2.1 Native (prefered)
 
 1. open a terminal session as a root by opening the terminal and running the command `sudo -s` and filling in the password of your useraccount
 
@@ -43,7 +47,7 @@ open a terminal and run the command `pip3 install pandas`
     python3 setup.py install
 ```
 
-##### 2.2.2.2 Rosseta 2 
+##### 2.3.2.2 Rosseta 2 
 
 1 . Close the Terminal Application
 
@@ -59,4 +63,3 @@ Check the checkbox labeled Open Using Rosetta
 ## 3. How to run the program
 
 go to the directory where the script is located in a terminal session en run `python3 matchAndCombineCsvFiles.py [filePath or cwd (current working directory)] [incidents filename] [incidents columnName] [assets filename] [assets columnname]` or if you are unsure what the arguments are just run `python3 matchAndCombineCsvFiles.py help`
-
