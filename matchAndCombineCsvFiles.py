@@ -49,7 +49,6 @@ def main():
                                       index=columns)
                         addEmpty = False
                         newDf = newDf.append(s, ignore_index=True)
-                print(addEmpty)
                 if addEmpty == True:
                     toAddLen = len(columns) - len(row)
                     newRow = []
