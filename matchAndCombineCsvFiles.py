@@ -10,16 +10,17 @@ def runHelp():
 
 
 def main():
-    argLen = len(sys.argv)
+    argLen = len(sys.argv)  # length of the arguments
 
+    # check if length of the arguments is 2 and the second index is help
     if(argLen == 2 and sys.argv[1] == "help"):
-        runHelp()
-        sys.exit()
+        runHelp()  # runs the help command
+        sys.exit()  # exits the program
 
-    if(argLen == 1 or argLen < 6):
+    if(argLen == 1 or argLen < 6):  # check what the length is 1 or less than 6
         runHelp()
         os.sys.exit("ERROR: not enough arguments")
-    else:
+    else:  # runs the main
         del os.sys.argv[0]
         sourceDir, filePath1, column1, filePath2, column2 = os.sys.argv
         if(sourceDir == "cwd"):
@@ -44,25 +45,29 @@ def main():
             for index, row in df.iterrows():
                 addEmpty = True
                 for index1, row1 in df1.iterrows():
-                    if str(row[column1]).lower() == str(row1[column2]).lower():
+                    if str(row[column1]).lower() == str(row1[column2]).lower():  # check
                         s = pd.Series(data=[*row, *row1],
-                                      index=columns)
-                        addEmpty = False
+                                      index=columns)  # combines the two rows from both csv-file together
+                        addEmpty = False  # lets the program know no empty row needs to be added
+                        # adds the row to the new csv
                         newDf = newDf.append(s, ignore_index=True)
+                        continue
                 if addEmpty == True:
+                    # calculates how many empty columns needed to add
                     toAddLen = len(columns) - len(row)
-                    newRow = []
-                    for x in range(toAddLen):
-                        newRow.append("")
+                    newRow = []  # the empty list for all the empty columns
+                    for x in range(toAddLen):  # for loop until x is toAddLen
+                        newRow.append("")  # appends
                     s = pd.Series(
                         data=[*row, *newRow],
-                        index=[*df.columns, *df1.columns])
+                        index=columns)
                     newDf = newDf.append(s, ignore_index=True)
                 sys.stdout.write("-")
                 sys.stdout.flush()
             sys.stdout.write("]\n")  # this ends the progress bar
             newDf.to_csv(os.path.join(sourceDir, "out.csv"))
-        except KeyboardInterrupt:
+        except KeyboardInterrupt:  # run this when there was a keyboard interupt
+            # generates a out.csv when keyboardInterrupt
             newDf.to_csv(os.path.join(sourceDir, "out.csv"))
 
 
