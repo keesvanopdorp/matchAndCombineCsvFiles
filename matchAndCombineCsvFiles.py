@@ -56,9 +56,9 @@ def main():
                     s = pd.Series(
                         data=[*row, *newRow],
                         index=[*df.columns, *df1.columns])
-                newDf = newDf.append(s, ignore_index=True)
-                sys.stdout.write("-")
-                sys.stdout.flush()
+            newDf = newDf.append(s, ignore_index=True)
+            sys.stdout.write("-")
+            sys.stdout.flush()
     sys.stdout.write("]\n")  # this ends the progress bar
     newDf.to_csv(os.path.join(sourceDir, "out.csv"))
 
